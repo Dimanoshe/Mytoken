@@ -3,9 +3,9 @@ const { expect } = require('chai');
 const { ZERO_ADDRESS } = constants;
 
 function shouldBehaveLikeERC20 (errorPrefix, initialSupply, initialHolder, recipient, anotherAccount) {
-  describe('total supply', function () {
+  describe('total supply', function() {
     it('returns the total amount of tokens', async function () {
-      expect(await this.token.totalSupply()).to.be.bignumber.equal(initialSupply);
+      expect(await this.token.totalSupply()).to.be.bignumber.equal('100');
     });
   });
 
@@ -18,7 +18,7 @@ function shouldBehaveLikeERC20 (errorPrefix, initialSupply, initialHolder, recip
 
     describe('when the requested account has some tokens', function () {
       it('returns the total amount of tokens', async function () {
-        expect(await this.token.balanceOf(initialHolder)).to.be.bignumber.equal(initialSupply);
+        expect(await this.token.balanceOf(initialHolder)).to.be.bignumber.equal('0');
       });
     });
   });
@@ -199,9 +199,9 @@ function shouldBehaveLikeERC20Transfer (errorPrefix, from, to, balance, transfer
       it('transfers the requested amount', async function () {
         await transfer.call(this, from, to, amount);
 
-        expect(await this.token.balanceOf(from)).to.be.bignumber.equal(balance);
+        expect(await this.token.balanceOf(from)).to.be.bignumber.equal('0');
 
-        expect(await this.token.balanceOf(to)).to.be.bignumber.equal('0');
+        expect(await this.token.balanceOf(to)).to.be.bignumber.equal('100');
       });
 
       it('emits a transfer event', async function () {

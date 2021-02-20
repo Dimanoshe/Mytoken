@@ -8,8 +8,8 @@ const {
   shouldBehaveLikeERC20Approve,
 } = require('./ERC20.behavior');
 
-const ERC20Mock = artifacts.require('ERC20Mock');
-const ERC20DecimalsMock = artifacts.require('ERC20DecimalsMock');
+const ExampleToken = artifacts.require('ExampleToken');
+
 
 contract('ERC20', function (accounts) {
   const [ initialHolder, recipient, anotherAccount ] = accounts;
@@ -17,38 +17,32 @@ contract('ERC20', function (accounts) {
   const name = 'My Token';
   const symbol = 'MTKN';
 
-  const initialSupply = new BN(100);
+  const initialSupply = new BN('100');
+  
+  const spender = recipient;
 
   beforeEach(async function () {
-    this.token = await ERC20Mock.new(name, symbol, initialHolder, initialSupply);
+    this.token = await ExampleToken.new();
+    await this.token.mint(spender, '100');
   });
 
   it('has a name', async function () {
-    expect(await this.token.name()).to.equal(name);
+    expect(await this.token.name()).to.equal("Example Token");
   });
 
   it('has a symbol', async function () {
-    expect(await this.token.symbol()).to.equal(symbol);
+    expect(await this.token.symbol()).to.equal("ELT");
   });
 
   it('has 18 decimals', async function () {
     expect(await this.token.decimals()).to.be.bignumber.equal('18');
   });
 
-  describe('_setupDecimals', function () {
-    const decimals = new BN(6);
-
-    it('can set decimals during construction', async function () {
-      const token = await ERC20DecimalsMock.new(name, symbol, decimals);
-      expect(await token.decimals()).to.be.bignumber.equal(decimals);
-    });
-  });
 
   shouldBehaveLikeERC20('ERC20', initialSupply, initialHolder, recipient, anotherAccount);
 
   describe('decrease allowance', function () {
     describe('when the spender is not the zero address', function () {
-      const spender = recipient;
 
       function shouldDecreaseApproval (amount) {
         describe('when there was no approved amount before', function () {
@@ -206,7 +200,7 @@ contract('ERC20', function (accounts) {
   });
 
   describe('_mint', function () {
-    const amount = new BN(50);
+    const amount = new BN(1250);
     it('rejects a null account', async function () {
       await expectRevert(
         this.token.mint(ZERO_ADDRESS, amount), 'ERC20: mint to the zero address',
@@ -225,7 +219,7 @@ contract('ERC20', function (accounts) {
       });
 
       it('increments recipient balance', async function () {
-        expect(await this.token.balanceOf(recipient)).to.be.bignumber.equal(amount);
+        expect(await this.token.balanceOf(recipient)).to.be.bignumber.equal('1350');
       });
 
       it('emits Transfer event', async function () {
