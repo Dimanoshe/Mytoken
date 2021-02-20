@@ -1,7 +1,7 @@
-pragma solidity 0.8.0;
+pragma solidity  0.6.12;
 
-import "../openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
-import "../openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol";
+import "../openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
+import "../openzeppelin-contracts/contracts/token/ERC20/ERC20Burnable.sol";
 
 
 contract ExampleToken is ERC20{
@@ -26,6 +26,3 @@ contract ExampleToken is ERC20{
         return true;
     }
 }
-
-
-
