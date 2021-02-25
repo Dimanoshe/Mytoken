@@ -12,7 +12,7 @@ contract ExampleToken is ERC20{
     function mint(address account, uint256 amount) public virtual {
         require(amount > 0);
         _mint(account, amount);
-       
+        
     }
 
     /**
