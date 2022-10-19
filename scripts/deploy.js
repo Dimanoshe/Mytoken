@@ -1,5 +1,6 @@
 async function main () {
   // We get the contract to deploy
+  // For Start Deploy: npx hardhat run --network goerli scripts/deploy.js
   const ExampleToken = await ethers.getContractFactory('ExampleToken');
   console.log('Deploying ExampleToken...');
   const extoken = await ExampleToken.deploy();
