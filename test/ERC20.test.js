@@ -45,7 +45,7 @@ contract('ExampleToken', function (accounts) {
       function shouldDecreaseApproval (amount) {
         describe('when there was no approved amount before', function () {
           it('reverts', async function () {
-            await expectRevert(this.token.decreaseAllowance(
+            expectRevert(this.token.decreaseAllowance(
               spender, amount, { from: initialHolder }), 'ERC20: decreased allowance below zero',
             );
           });
@@ -245,7 +245,7 @@ contract('ExampleToken', function (accounts) {
       const describeBurn = function (description, amount) {
         describe(description, function () {
           beforeEach('burning', async function () {
-            const { logs } = await this.token.burn('0');
+            const { logs } = await expect(this.token.burn('0'));
             this.logs = logs;
           });
 

@@ -1,7 +1,10 @@
-pragma solidity  0.6.12;
+pragma solidity  0.8.0;
 
 import "../openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import "../openzeppelin-contracts/contracts/token/ERC20/ERC20Burnable.sol";
+import "../openzeppelin-contracts/contracts/mocks/ERC20Mock.sol";
+import "../openzeppelin-contracts/contracts/mocks/ERC20DecimalsMock.sol";
+
 
 
 contract ExampleToken is ERC20{
