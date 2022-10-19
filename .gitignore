@@ -1,0 +1,6 @@
+secrets.json
+.vscode/
+cache/
+artifacts/
+node_modules/
+
