@@ -1,4 +1,6 @@
-pragma solidity  0.8.0;
+// SPDX-License-Identifier: UNLICENSED
+
+pragma solidity ^0.8.0;
 
 import "../openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import "../openzeppelin-contracts/contracts/token/ERC20/ERC20Burnable.sol";
@@ -8,7 +10,7 @@ import "../openzeppelin-contracts/contracts/mocks/ERC20DecimalsMock.sol";
 
 
 contract ExampleToken is ERC20{
-    constructor () public ERC20("Example Token", "ELT") {
+    constructor()ERC20("Example Token", "ELT") {
         // solhint-disable-previous-line no-empty-blocks
     }
 
